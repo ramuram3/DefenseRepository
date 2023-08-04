@@ -53,6 +53,7 @@ public class Enemys : MonoBehaviour
         if (gameObject.tag == "EnemyCastle")
         {
             maxHp = 200 + GameManager.instance.stage * 20;
+            hp = 200 + GameManager.instance.stage * 20;
         }
 
         diamondValue *= (1 + 0.05f * GameManager.instance.curStage);
@@ -83,12 +84,14 @@ public class Enemys : MonoBehaviour
             if (reinforceState)
             {
                 attackDamage = initAttackDamage * 1.2f;
-                attackSpeed = initAttackSpeed * 1.5f;
+                attackSpeed = initAttackSpeed * (float)2/3f;
+                transform.GetChild(0).transform.gameObject.SetActive(true);
             }
             else
             {
                 attackDamage = initAttackDamage;
                 attackSpeed = initAttackSpeed;
+                transform.GetChild(0).transform.gameObject.SetActive(false);
             }
 
         }

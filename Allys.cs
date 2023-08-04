@@ -47,6 +47,7 @@ public class Allys : MonoBehaviour
         if (gameObject.tag == "AllyCastle")
         {
             maxHp = 200 + GameManager.instance.stage * 20;
+            hp = 200 + GameManager.instance.stage * 20;
         }
 
         timer = attackSpeed;
@@ -77,12 +78,14 @@ public class Allys : MonoBehaviour
             if(reinforceState)
             {
                 attackDamage = initAttackDamage * 1.2f;
-                attackSpeed = initAttackSpeed * 1.5f;
+                attackSpeed = initAttackSpeed * (float)2/3f;
+                transform.GetChild(0).transform.gameObject.SetActive(true);
             }
             else
             {
                 attackDamage = initAttackDamage;
                 attackSpeed = initAttackSpeed;
+                transform.GetChild(0).transform.gameObject.SetActive(false);
             }
 
         }
