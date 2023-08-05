@@ -89,13 +89,12 @@ public class SpawnEnemy : MonoBehaviour
         SpawnData spawnData = spawnDataList[spawnIndex];
 
         enemy.moveSpeed = spawnData.moveSpeed;
-        enemy.attackSpeed = spawnData.attackSpeed[spawnData.level] * (100/(float)(100 + offset));
-        enemy.attackDamage = spawnData.attackDamage[spawnData.level] * (1 + offset/100);
+        enemy.attackSpeed = spawnData.attackSpeed * (100/(float)(100 + offset));
+        enemy.attackDamage = spawnData.attackDamage * (1 + offset/100);
         enemy.range = spawnData.range[spawnData.level];
-        enemy.maxHp = spawnData.maxHp[spawnData.level] * (1 + offset/100);
-        enemy.hp = spawnData.hp[spawnData.level] * (1 + offset/100);
+        enemy.maxHp = spawnData.maxHp * (1 + offset/100);
+        enemy.hp = spawnData.hp * (1 + offset/100);
         enemy.hitNum = spawnData.hitNum[spawnData.level];
-        enemy.level = spawnData.level;
         enemy.awakeLevel = spawnData.awakeLevel;
 
 

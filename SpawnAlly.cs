@@ -52,11 +52,11 @@ public class SpawnAlly : MonoBehaviour
             GameObject unitObj = Instantiate(prefebs[spawnData.id], transform);
             Allys ally = unitObj.GetComponent<Allys>();
             ally.moveSpeed = spawnData.moveSpeed;
-            ally.attackSpeed = spawnData.attackSpeed[allyUnitLevel[spawnData.id]] * (100/(float)(100 + 5 * GameManager.instance.dexLevel[spawnData.id]));
-            ally.attackDamage = spawnData.attackDamage[allyUnitLevel[spawnData.id]] * (1 + 0.05f * GameManager.instance.strLevel[spawnData.id]);
+            ally.attackSpeed = spawnData.attackSpeed * (1 / (1 + 0.2f * allyUnitLevel[spawnData.id])) * (1/(float)(1 + 0.05f * GameManager.instance.dexLevel[spawnData.id])) * 1/(1 + 0.2f * GameManager.instance.awakeLevel[spawnData.id]);
+            ally.attackDamage = spawnData.attackDamage * (1 + 0.2f * allyUnitLevel[spawnData.id]) * (1 + 0.05f * GameManager.instance.strLevel[spawnData.id]) * (1 + 0.2f * GameManager.instance.awakeLevel[spawnData.id]);
             ally.range = spawnData.range[allyUnitLevel[spawnData.id]];
-            ally.maxHp = spawnData.maxHp[allyUnitLevel[spawnData.id]] * (1 + 0.05f * GameManager.instance.defLevel[spawnData.id]);
-            ally.hp = spawnData.hp[allyUnitLevel[spawnData.id]] * (1 + 0.05f * GameManager.instance.defLevel[spawnData.id]);
+            ally.maxHp = spawnData.maxHp * (1 + 0.2f * allyUnitLevel[spawnData.id]) * (1 + 0.05f * GameManager.instance.defLevel[spawnData.id]) * (1 + 0.2f * GameManager.instance.awakeLevel[spawnData.id]);
+            ally.hp = spawnData.hp * (1 + 0.2f * allyUnitLevel[spawnData.id]) * (1 + 0.05f * GameManager.instance.defLevel[spawnData.id]);
             int ran = Random.Range(0, 100);
             if(ran<10 + 2 * GameManager.instance.lukLevel[spawnData.id])
             {

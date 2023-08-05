@@ -17,12 +17,17 @@ public class UpgradePanel : MonoBehaviour
     public Text dexDiamond;
     public Text defDiamond;
     public Text lukDiamond;
+    public Text[] infoTexts;
     public Image[] str;
     public Image[] dex;
     public Image[] def;
     public Image[] luk;
     public GameObject[] stars;
+    public GameObject[] descPanels;
     public int curUnitId;
+
+    public int descIndex;
+    string descText;
 
 
     void LateUpdate()
@@ -32,10 +37,14 @@ public class UpgradePanel : MonoBehaviour
         {
             dropItemsText[i].text = GameManager.instance.dropItems[i].ToString();
         }
+        infoTexts[0].text = "공격 : " + string.Format("{0:F1}", GameManager.instance.spawnDatas[curUnitId].attackDamage * (1 + 0.05f * GameManager.instance.strLevel[curUnitId]) * (1 + 0.2f * GameManager.instance.awakeLevel[curUnitId]));
+        infoTexts[1].text = "공속 : " + string.Format("{0:F2}",GameManager.instance.spawnDatas[curUnitId].attackSpeed * (1/(1 + 0.05f * GameManager.instance.dexLevel[curUnitId])) * (1/(1 + 0.2f * GameManager.instance.awakeLevel[curUnitId])));
+        infoTexts[2].text = "체력 : " + (int)(GameManager.instance.spawnDatas[curUnitId].maxHp * (1 + 0.05f * GameManager.instance.defLevel[curUnitId]) * (1 + 0.2f * GameManager.instance.awakeLevel[curUnitId]));
     }
 
     void OnEnable()
     {
+        descIndex = -1;
         curPortrait.sprite = portraits[curUnitId];
         curAwakeReqItem.sprite = awakeReqItems[curUnitId];
 
@@ -131,6 +140,7 @@ public class UpgradePanel : MonoBehaviour
     }
     public void PageUp()
     {
+        descIndex = -1;
         if(curUnitId != 3)
         {
             curUnitId++;
@@ -234,6 +244,7 @@ public class UpgradePanel : MonoBehaviour
 
     public void PageDown()
     {
+        descIndex = -1;
         if (curUnitId != 0)
         {
             curUnitId--;
@@ -337,6 +348,7 @@ public class UpgradePanel : MonoBehaviour
 
     public void StatUpgrade(int statId)
     {
+
         // statId 
         // 0 : str
         // 1 : dex
@@ -467,5 +479,40 @@ public class UpgradePanel : MonoBehaviour
             }
             // 각성 별 추가 
         }
+    }
+
+    public void ShowDescription(int index)
+    {
+        if(descIndex != index)
+        {
+            if(descIndex != -1)
+            {
+                descPanels[descIndex].SetActive(false);
+            }
+            descIndex = index;
+            switch(descIndex)
+            {
+                case 0:
+                    descText = "데미지 5% 증가\n" + "(현재 +" + GameManager.instance.strLevel[curUnitId] * 5 + "%)";
+                    break;
+                case 1:
+                    descText = "공격속도 5% 증가\n" + "(현재 +" + GameManager.instance.dexLevel[curUnitId] * 5 + "%)";
+                    break;
+                case 2:
+                    descText = "체력 5% 증가\n" + "(현재 +" + GameManager.instance.defLevel[curUnitId] * 5 + "%)";
+                    break;
+                case 3:
+                    descText = "엘리트유닛 등장 확률 2% 증가\n" + "(현재 +" + (GameManager.instance.lukLevel[curUnitId] * 2 + 10) + "%)";
+                    break;
+            }
+            descPanels[index].SetActive(true);
+            descPanels[index].transform.GetChild(0).gameObject.GetComponent<Text>().text = descText;
+        }
+        else
+        {
+            descPanels[index].SetActive(false);
+            descIndex = -1;
+        }
+
     }
 }

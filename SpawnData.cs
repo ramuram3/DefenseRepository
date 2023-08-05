@@ -6,11 +6,11 @@ using UnityEngine;
 public class SpawnData : ScriptableObject
 {
     public float moveSpeed;
-    public float[] attackSpeed;
-    public float[] attackDamage;
+    public float attackSpeed;
+    public float attackDamage;
     public float[] range;
-    public float[] maxHp;
-    public float[] hp;
+    public float maxHp;
+    public float hp;
     public int[] hitNum;
     public int id;
     public int purchaseGold;

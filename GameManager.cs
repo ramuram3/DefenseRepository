@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public int[] curStageDropItems;
 
     [Header("#Unit")]
+    public SpawnData[] spawnDatas;
     public int[] strLevel;
     public int[] dexLevel;
     public int[] defLevel;
