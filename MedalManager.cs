@@ -27,5 +27,6 @@ public class MedalManager : MonoBehaviour
     public void MedalQuests(int stage, int medalNum)
     {
         medalInfo[stage] = medalNum;
+        GameManager.instance.medal++;
     }
 }

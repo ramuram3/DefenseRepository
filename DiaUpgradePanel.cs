@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradePanel : MonoBehaviour
+public class DiaUpgradePanel : MonoBehaviour
 {
-    public Text diamondText;
-    public Text[] dropItemsText;
-
     public Sprite[] portraits;
     public Sprite[] awakeReqItems;
     public Image curPortrait;
@@ -32,11 +29,7 @@ public class UpgradePanel : MonoBehaviour
 
     void LateUpdate()
     {
-        diamondText.text = ((int)GameManager.instance.diamond).ToString();
-        for (int i = 0; i < GameManager.instance.dropItems.Length; i++)
-        {
-            dropItemsText[i].text = GameManager.instance.dropItems[i].ToString();
-        }
+
         infoTexts[0].text = "공격 : " + string.Format("{0:F1}", GameManager.instance.spawnDatas[curUnitId].attackDamage * (1 + 0.05f * GameManager.instance.strLevel[curUnitId]) * (1 + 0.2f * GameManager.instance.awakeLevel[curUnitId]));
         infoTexts[1].text = "공속 : " + string.Format("{0:F2}",GameManager.instance.spawnDatas[curUnitId].attackSpeed * (1/(1 + 0.05f * GameManager.instance.dexLevel[curUnitId])) * (1/(1 + 0.2f * GameManager.instance.awakeLevel[curUnitId])));
         infoTexts[2].text = "체력 : " + (int)(GameManager.instance.spawnDatas[curUnitId].maxHp * (1 + 0.05f * GameManager.instance.defLevel[curUnitId]) * (1 + 0.2f * GameManager.instance.awakeLevel[curUnitId]));

@@ -8,12 +8,14 @@ public class GameData
     public int[] medalInfo= new int[20];
     public int stage;
     public float diamond;
+    public int medal;
     public int[] dropItems = new int[4];
     public int[] strLevel = new int[4];
     public int[] dexLevel = new int[4];
     public int[] defLevel = new int[4];
     public int[] lukLevel = new int[4];
     public int[] awakeLevel = new int[4];
+    public int[] medalSkillLevel = new int[4]; //ÀÎµ¦½º´Â unit id
 
 }
 
@@ -63,9 +65,16 @@ public class DataManager : MonoBehaviour
         gameData.stage = stage;
     }
 
-    public void CheckMedal(int stage)
+    public void CheckMedalInfo(int stage)
     {
         gameData.medalInfo[stage] = MedalManager.instance.medalInfo[stage];
+        gameData.medal = GameManager.instance.medal;
+        
+    }
+
+    public void CheckMedal()
+    {
+        gameData.medal = GameManager.instance.medal;
     }
 
     public void CheckDiamond()
@@ -92,5 +101,10 @@ public class DataManager : MonoBehaviour
     public void CheckAwakeLevel(int i)
     {
         gameData.awakeLevel[i] = GameManager.instance.awakeLevel[i];
+    }
+
+    public void CheckMedalSkillLevel()
+    {
+        gameData.medalSkillLevel = GameManager.instance.medalSkillLevel;
     }
 }

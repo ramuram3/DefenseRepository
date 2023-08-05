@@ -85,7 +85,7 @@ public class WinLoseUI : MonoBehaviour
         }
         GameManager.instance.diamond += GameManager.instance.curStageDiamond;
         DataManager.instance.CheckStage(GameManager.instance.stage);
-        DataManager.instance.CheckMedal(GameManager.instance.stage);
+        DataManager.instance.CheckMedalInfo(GameManager.instance.stage);
         DataManager.instance.CheckDiamond();
         DataManager.instance.CheckDropItems();
         DataManager.instance.Save();

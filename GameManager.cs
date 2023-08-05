@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int unitNum = 4;
+
     [Header("#Stage")]
     public int maxStage;
     public int stage; //(클리어 한 스테이지 + 1) 스테이지
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("#Resources")]
     public float diamond;
     public float curStageDiamond;
+    public int medal;
     public int[] dropItems;
     public int[] curStageDropItems;
 
@@ -29,6 +32,10 @@ public class GameManager : MonoBehaviour
     public int[] statUpgradeDiamond;
     public int[] awakeLevel;
     public int[] awakeReqItemNum;
+
+    [Header("#MedalSkill")]
+    public int[] medalSkillLevel; //인덱스는 unit id
+    public int[] medalSkillLevelUpMedal; //인덱스는 배울스킬 레벨
 
 
     void Awake()
@@ -53,6 +60,8 @@ public class GameManager : MonoBehaviour
             MedalManager.instance.medalInfo = DataManager.instance.gameData.medalInfo;
             stage = DataManager.instance.gameData.stage;
             diamond = DataManager.instance.gameData.diamond;
+            medal = DataManager.instance.gameData.medal;
+            medalSkillLevel = DataManager.instance.gameData.medalSkillLevel;
             for(int i = 0; i < dropItems.Length; i++)
             {
                 dropItems[i] = DataManager.instance.gameData.dropItems[i];
